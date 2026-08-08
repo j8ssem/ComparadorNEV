@@ -1,0 +1,37 @@
+name: Release Oficial (Main)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generar Tag Release desde package.json
+        run: |
+          # 1. Leer la versión objetivo limpia del package.json
+          TARGET_VERSION=$(node -p "require('./package.json').version")
+          TAG_NAME="v${TARGET_VERSION}"
+          
+          echo "Creando nueva release oficial: $TAG_NAME"
+          
+          # 2. Configurar git y crear/subir el tag oficial
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git tag -a "$TAG_NAME" -m "Release oficial $TAG_NAME"
+          git push origin "$TAG_NAME"
