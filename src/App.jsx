@@ -45,7 +45,7 @@ export default function App() {
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
         <h1 className="text-3xl font-extrabold text-center mb-8 text-emerald-400">
-          Comparadora de Ahorro: Combustión vs Eléctrico
+          Comparador de ahorro: Combustión vs. Eléctrico
         </h1>
 
         {/* 1. Bloque superior: Kilómetros anuales */}
