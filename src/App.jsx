@@ -1,16 +1,26 @@
 import { useState } from 'react';
+import { DEFAULT_VALUES } from './constants';
 
 export default function App() {
   // Estado común
-  const [kmAnuales, setKmAnuales] = useState(15000);
+  const [kmAnuales, setKmAnuales] = useState(DEFAULT_VALUES.kmAnuales);
 
   // Estado Coche Combustión
-  const [consumoGasolina, setConsumoGasolina] = useState(6.5);
-  const [precioGasolina, setPrecioGasolina] = useState(1.65);
+  const [consumoGasolina, setConsumoGasolina] = useState(DEFAULT_VALUES.consumoGasolina);
+  const [precioGasolina, setPrecioGasolina] = useState(DEFAULT_VALUES.precioGasolina);
 
   // Estado Coche Eléctrico
-  const [consumoElectrico, setConsumoElectrico] = useState(17);
-  const [precioKwh, setPrecioKwh] = useState(0.18);
+  const [consumoElectrico, setConsumoElectrico] = useState(DEFAULT_VALUES.consumoElectrico);
+  const [precioKwh, setPrecioKwh] = useState(DEFAULT_VALUES.precioKwh);
+
+  // Función para restablecer
+  const handleReset = () => {
+    setKmAnuales(DEFAULT_VALUES.kmAnuales);
+    setConsumoGasolina(DEFAULT_VALUES.consumoGasolina);
+    setPrecioGasolina(DEFAULT_VALUES.precioGasolina);
+    setConsumoElectrico(DEFAULT_VALUES.consumoElectrico);
+    setPrecioKwh(DEFAULT_VALUES.precioKwh);
+  };
 
   // Cálculos de costes
   const costeGasolina = (kmAnuales / 100) * consumoGasolina * precioGasolina;
@@ -35,7 +45,7 @@ export default function App() {
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
         <h1 className="text-3xl font-extrabold text-center mb-8 text-emerald-400">
-          Comparadora de Ahorro: Combustión vs Eléctrico
+          Comparador de ahorro: Combustión vs. Eléctrico
         </h1>
 
         {/* 1. Bloque superior: Kilómetros anuales */}
@@ -63,6 +73,17 @@ export default function App() {
             onChange={(e) => setKmAnuales(Number(e.target.value))}
             className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-600 rounded-lg"
           />
+
+          {/* Botón Restablecer centrado debajo de los kilómetros */}
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={handleReset}
+              className="px-3 py-1.5 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors border border-slate-600 cursor-pointer flex items-center gap-1.5"
+            >
+              ↺ Restablecer valores
+            </button>
+          </div>
+
         </div>
 
         {/* 2. Columnas paralelas */}
