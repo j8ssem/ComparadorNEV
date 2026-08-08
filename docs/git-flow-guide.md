@@ -8,7 +8,7 @@ Este documento detalla la convención de Git, el control de versiones y el flujo
 
 * **SemVer (Semantic Versioning 2.0.0):** Formato `MAJOR.MINOR.PATCH`.
 * **Single Source of Truth:** La versión objetivo se define directamente en el archivo `package.json` durante la Pull Request (PR).
-* **Trag-and-PR:** La rama `develop` representa el entorno de staging/pre-producción y `main` representa el entorno de producción. Ambas están protegidas y solo aceptan cambios mediante Pull Requests.
+* **Trunk-based with PRs** La rama `develop` representa el entorno de staging/pre-producción y `main` representa el entorno de producción. Ambas están protegidas y solo aceptan cambios mediante Pull Requests.
 * **Sin sobre-ingeniería:** No se utilizan herramientas automáticas externas para calcular versiones ni ramas intermedias de release. Todo es transparente y predecible.
 
 ---

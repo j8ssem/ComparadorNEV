@@ -6,6 +6,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ### Añadido
 * Documentación con el flujo git seguido en este proyecto.
+* Update del README.md
 
 ## [1.2.0] - 2026-08-08
 
