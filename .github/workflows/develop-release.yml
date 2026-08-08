@@ -8,6 +8,10 @@ on:
 jobs:
   prerelease:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
