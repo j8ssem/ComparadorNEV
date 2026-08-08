@@ -10,6 +10,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 * Test unitario con Vitest para validar los valores iniciales.
 * Flujo de Integración Continua (CI) con GitHub Actions para validar Pull Requests.
 * Flujo de Integración Continua (CI) con Github Actions para generar versiones en develop
+* Flujo de Integración Continua (CI) con Github Actions para generar versiones en rama **main**
 
 ## [1.1.0] - 2026-08-08
 
