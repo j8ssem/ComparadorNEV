@@ -2,6 +2,11 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.3.0] - 2026-08-08
+
+### Añadido
+* Documentación con el flujo git seguido en este proyecto.
+
 ## [1.2.0] - 2026-08-08
 
 ### Añadido
