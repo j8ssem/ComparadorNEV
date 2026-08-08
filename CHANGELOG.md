@@ -2,6 +2,16 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.4.0] - 2026-08-08
+
+### Añadido
+- Factor de pérdidas en la recarga de vehículos eléctricos (`CHARGING_LOSS_FACTOR = 1.10`) aplicado al cálculo del consumo eléctrico.
+- Componente `TooltipInfo` con diseño estilizado e información explicativa sobre las pérdidas del 10% en recarga.
+- Prueba unitaria en Vitest para garantizar la integridad de la constante de pérdidas de carga.
+
+### Cambiado
+- Actualizado el cálculo de costes del vehículo eléctrico para reflejar la energía real demandada de la red.
+
 ## [1.3.0] - 2026-08-08
 
 ### Añadido

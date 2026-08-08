@@ -5,3 +5,5 @@ export const DEFAULT_VALUES = {
   consumoElectrico: 17,
   precioKwh: 0.18,
 };
+
+export const CHARGING_LOSS_FACTOR = 1.10;

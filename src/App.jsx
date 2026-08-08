@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { DEFAULT_VALUES } from './constants';
+import { DEFAULT_VALUES, CHARGING_LOSS_FACTOR } from './constants';
+import { TooltipInfo } from './TooltipInfo';
 
 export default function App() {
   // Estado común
@@ -24,7 +25,7 @@ export default function App() {
 
   // Cálculos de costes
   const costeGasolina = (kmAnuales / 100) * consumoGasolina * precioGasolina;
-  const costeElectrico = (kmAnuales / 100) * consumoElectrico * precioKwh;
+  const costeElectrico = (kmAnuales / 100) * (consumoElectrico * CHARGING_LOSS_FACTOR) * precioKwh;
   const ahorroAnual = costeGasolina - costeElectrico;
 
   return (
@@ -176,8 +177,9 @@ export default function App() {
                 {/* Consumo kWh/100km */}
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-slate-300">
+                    <label className="flex items-center text-sm font-medium text-slate-300">
                       Consumo
+                      <TooltipInfo />
                     </label>
                     <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
                       <input
