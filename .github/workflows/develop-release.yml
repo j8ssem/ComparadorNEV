@@ -1,0 +1,38 @@
+name: Release Intermedia (Develop)
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generar Tag de Prerelease desde package.json
+        run: |
+          # 1. Leer la versión objetivo limpia desde el package.json
+          TARGET_VERSION=$(node -p "require('./package.json').version")
+          
+          # 2. Generar el timestamp
+          TIMESTAMP=$(date +'%Y%m%d-%H%M%S')
+          
+          # 3. Construir el tag de desarrollo
+          TAG_NAME="v${TARGET_VERSION}-dev.${TIMESTAMP}"
+          
+          echo "Creando nueva versión de desarrollo: $TAG_NAME"
+          
+          # 4. Configurar git y crear/subir el tag
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git tag -a "$TAG_NAME" -m "Prerelease de staging $TAG_NAME"
+          git push origin "$TAG_NAME"
