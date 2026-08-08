@@ -66,4 +66,4 @@ Aplicación web interactiva para calcular y comparar el coste anual de uso entre
 
 ## 📚 Documentación del Proyecto
 
-* 📖 [Estrategia de Git, SemVer y Releases](docs/GIT_FLOW.md)
+* 📖 [Estrategia de Git, SemVer y Releases](docs/git-flow-guide.md)
