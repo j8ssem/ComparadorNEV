@@ -102,7 +102,7 @@ export default function App() {
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <label className="text-sm font-medium text-slate-300">
-                      Consumo
+                      Consumo medio
                     </label>
                     <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
                       <input
@@ -178,7 +178,7 @@ export default function App() {
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <label className="flex items-center text-sm font-medium text-slate-300">
-                      Consumo
+                      Consumo medio
                       <TooltipInfo />
                     </label>
                     <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
