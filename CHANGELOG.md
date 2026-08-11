@@ -2,6 +2,11 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.9.1] - 2026-08-12
+
+### Fixed
+- Change text in "Consumo modo EV" PHEV tooltip
+
 ## [1.9.0] - 2026-08-12
 
 ### Added

@@ -565,7 +565,7 @@ function PhevCard({
                   <label className="text-sm font-medium text-slate-300 leading-tight">
                     Consumo modo EV
                   </label>
-                  <TooltipInfo text="Se añade un 10% adicional al consumo para reflejar las pérdidas de energía durante el proceso de carga." />
+                  <TooltipInfo />
                 </div>
 
                 {/* Caja con el valor numérico */}
