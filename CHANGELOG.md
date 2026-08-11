@@ -2,6 +2,13 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.9.0] - 2026-08-12
+
+### Added
+- Include PHEV vehicles type and different comparator options
+- Update constants test
+- Improve "i" tooltip alignment
+
 ## [1.8.0] - 2026-08-11
 
 ### Added
