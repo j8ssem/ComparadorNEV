@@ -172,7 +172,7 @@ export default function App() {
           <div className="bg-slate-900/60 p-6 rounded-xl border border-cyan-500/30 flex flex-col justify-between space-y-6">
             <div>
               <h2 className="text-xl font-bold text-cyan-400 mb-6 text-center">
-                Vehículo Eléctrico
+                Vehículo EV
               </h2>
 
               <div className="space-y-6">
