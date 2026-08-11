@@ -2,6 +2,18 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.6.0] - 2026-08-08
+
+### Added
+- Add footer
+
+### Changed
+- Changes after repo rename to **ComparadorNEV**
+
+### Removed
+- Roadmap help info file `mejoras.md`
+
+
 ## [1.5.0] - 2026-08-08
 
 ### Añadido
