@@ -61,7 +61,7 @@ Implementa los cambios en el código. A continuación, actualiza la versión en 
 
 ```json
 {
-  "name": "calculina",
+  "name": "ComparadorNEV",
   "version": "1.3.0"
 }
 

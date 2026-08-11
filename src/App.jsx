@@ -48,7 +48,7 @@ export default function App() {
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
         <h1 className="text-3xl font-extrabold text-center mb-8 text-emerald-400">
-          Comparador de ahorro anual: Combustión vs. Eléctrico
+          Comparador de ahorro entre vehículos de nueva energía (NEV)
         </h1>
 
         {/* 1. Bloque superior: Kilómetros anuales */}
@@ -263,6 +263,24 @@ export default function App() {
         </div>
 
       </div>
+
+      <footer className="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500">
+        <p>
+          ComparadorNEV © 2026 — Desarrollado por{' '}
+          <a 
+            href="https://github.com/j8ssem" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-slate-200 underline transition-colors"
+          >
+            j8ssem
+          </a>
+        </p>
+        <p className="mt-1 opacity-75">
+          Licencia MIT · Proyecto Open Source
+        </p>
+      </footer>
+
     </div>
   );
 }

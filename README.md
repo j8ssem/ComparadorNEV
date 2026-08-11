@@ -1,4 +1,4 @@
-# Calculina — Comparador de Ahorro Energético
+# ComparadorNEV — Comparador de ahorro entre vehículos de nueva energía (NEV)
 
 ![Version](https://img.shields.io/badge/version-1.5.0-blue.svg)
 
@@ -24,8 +24,8 @@ Aplicación web interactiva para calcular y comparar el coste anual de uso entre
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/j8ssem/calculina.git
-   cd calculina
+   git clone https://github.com/j8ssem/ComparadorNEV.git
+   cd ComparadorNEV
    ```
 
 2. **Instalar dependencias:**

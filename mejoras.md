@@ -1,4 +1,4 @@
-# Roadmap de Mejoras y Arquitectura - Calculina
+# Roadmap de Mejoras y Arquitectura - ComparadorNEV
 
 Este documento recopila las futuras funcionalidades, tareas de infraestructura y decisiones técnicas para el desarrollo del proyecto.
 
@@ -59,5 +59,5 @@ Este documento recopila las futuras funcionalidades, tareas de infraestructura y
   * **Solución técnica:** Sí. Al ejecutar `npm run build`, Vite genera una carpeta `dist/` estática (HTML, CSS y JS). Esa carpeta se puede subir y ejecutar en cualquier servidor web tradicional (Nginx, Apache, CPanel) sin necesidad de tener Node.js instalado en producción.
 
 * **Despliegue en servidores con aplicaciones existentes:**
-  * **Planteamiento:** Determinar el procedimiento para desplegar Calculina en un servidor que ya aloja otras aplicaciones.
-  * **Solución técnica:** Se puede convivir sin interferir con otras apps de dos formas: mediante un subdominio (ej. `calculina.tudominio.com`) o dentro de una subcarpeta (ej. `tudominio.com/calculina/`) mediante reglas de proxy inverso en el servidor web.
+  * **Planteamiento:** Determinar el procedimiento para desplegar ComparadorNEV en un servidor que ya aloja otras aplicaciones.
+  * **Solución técnica:** Se puede convivir sin interferir con otras apps de dos formas: mediante un subdominio (ej. `comparadornev.tudominio.com`) o dentro de una subcarpeta (ej. `tudominio.com/comparadornev/`) mediante reglas de proxy inverso en el servidor web.
