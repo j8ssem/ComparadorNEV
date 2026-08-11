@@ -2,6 +2,12 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.5.0] - 2026-08-08
+
+### Añadido
+- Mensaje dinámico sobre el ahorro o sobrecoste del EV
+- Documento de posibles mejoras futuras: mejoras.md
+
 ## [1.4.0] - 2026-08-08
 
 ### Añadido
