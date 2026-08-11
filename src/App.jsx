@@ -10,9 +10,14 @@ export default function App() {
   const [consumoGasolina, setConsumoGasolina] = useState(DEFAULT_VALUES.consumoGasolina);
   const [precioGasolina, setPrecioGasolina] = useState(DEFAULT_VALUES.precioGasolina);
 
-  // Estado Coche Eléctrico
+  // Estado Coche Eléctrico (Básico)
   const [consumoElectrico, setConsumoElectrico] = useState(DEFAULT_VALUES.consumoElectrico);
   const [precioKwh, setPrecioKwh] = useState(DEFAULT_VALUES.precioKwh);
+
+  // Estado Opciones Avanzadas EV
+  const [mostrarAvanzado, setMostrarAvanzado] = useState(false);
+  const [precioKwhFuera, setPrecioKwhFuera] = useState(DEFAULT_VALUES.precioKwhFuera);
+  const [porcentajeFuera, setPorcentajeFuera] = useState(DEFAULT_VALUES.porcentajeFuera);
 
   // Función para restablecer
   const handleReset = () => {
@@ -21,14 +26,37 @@ export default function App() {
     setPrecioGasolina(DEFAULT_VALUES.precioGasolina);
     setConsumoElectrico(DEFAULT_VALUES.consumoElectrico);
     setPrecioKwh(DEFAULT_VALUES.precioKwh);
+    setPrecioKwhFuera(DEFAULT_VALUES.precioKwhFuera);
+    setPorcentajeFuera(DEFAULT_VALUES.porcentajeFuera);
+    setMostrarAvanzado(false);
   };
 
+  // Valores asegurados (evitan NaN si el input se queda en blanco o invalido)
+  const safeKmAnuales = Number(kmAnuales) || 0;
+  const safeConsumoGasolina = Number(consumoGasolina) || 0;
+  const safePrecioGasolina = Number(precioGasolina) || 0;
+  const safeConsumoElectrico = Number(consumoElectrico) || 0;
+  const safePrecioKwh = Number(precioKwh) || 0;
+  const safePrecioKwhFuera = Number(precioKwhFuera) || 0;
+  const safePorcentajeFuera = Number(porcentajeFuera) || 0;
+
   // Cálculos de costes
-  const costeGasolina = (kmAnuales / 100) * consumoGasolina * precioGasolina;
-  const costeElectrico = (kmAnuales / 100) * (consumoElectrico * CHARGING_LOSS_FACTOR) * precioKwh;
+  const costeGasolina = (safeKmAnuales / 100) * safeConsumoGasolina * safePrecioGasolina;
+
+  // Cálculo del precio medio ponderado por kWh según el % fuera de casa
+  const fraccionFuera = mostrarAvanzado ? safePorcentajeFuera / 100 : 0;
+  const fraccionEnCasa = 1 - fraccionFuera;
+  const precioKwhMedio = (safePrecioKwh * fraccionEnCasa) + (safePrecioKwhFuera * fraccionFuera);
+
+  const costeElectrico = (safeKmAnuales / 100) * (safeConsumoElectrico * CHARGING_LOSS_FACTOR) * precioKwhMedio;
+
   const diferencia = costeGasolina - costeElectrico;
   const esAhorro = diferencia >= 0;
   const importeAbsoluto = Math.abs(diferencia).toFixed(2);
+
+  // Cálculos de desglose en km
+  const kmFuera = Math.round(safeKmAnuales * (safePorcentajeFuera / 100));
+  const kmEnCasa = Math.round(safeKmAnuales * ((100 - safePorcentajeFuera) / 100));
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
@@ -48,12 +76,9 @@ export default function App() {
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
         <header className="text-center mb-8">
-          {/* Título principal: Impactante pero compacto */}
           <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-400 tracking-tight mb-2">
             ComparadorNEV
           </h1>
-          
-          {/* Subtítulo: Informativo, tono más suave y tamaño reducido */}
           <p className="text-base md:text-lg text-slate-300 max-w-xl mx-auto font-normal">
             Calcula tu ahorro anual estimado entre un vehículo de nueva energía (NEV) y uno de combustión
           </p>
@@ -69,7 +94,7 @@ export default function App() {
               <input
                 type="number"
                 value={kmAnuales}
-                onChange={(e) => setKmAnuales(Number(e.target.value))}
+                onChange={(e) => setKmAnuales(e.target.value)}
                 className="w-20 bg-transparent text-right text-lg font-bold text-white focus:outline-none"
               />
               <span className="text-xs text-slate-400">km</span>
@@ -80,12 +105,12 @@ export default function App() {
             min="1000"
             max="50000"
             step="500"
-            value={kmAnuales}
+            value={safeKmAnuales}
             onChange={(e) => setKmAnuales(Number(e.target.value))}
             className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-600 rounded-lg"
           />
 
-          {/* Botón Restablecer centrado debajo de los kilómetros */}
+          {/* Botón Restablecer */}
           <div className="mt-4 flex justify-center">
             <button
               onClick={handleReset}
@@ -94,7 +119,6 @@ export default function App() {
               ↺ Restablecer valores
             </button>
           </div>
-
         </div>
 
         {/* 2. Columnas paralelas */}
@@ -119,7 +143,7 @@ export default function App() {
                         type="number"
                         step="0.1"
                         value={consumoGasolina}
-                        onChange={(e) => setConsumoGasolina(Number(e.target.value))}
+                        onChange={(e) => setConsumoGasolina(e.target.value)}
                         className="w-14 bg-transparent text-right font-bold text-amber-400 focus:outline-none"
                       />
                       <span className="text-xs text-slate-400">l/100km</span>
@@ -130,7 +154,7 @@ export default function App() {
                     min="3"
                     max="15"
                     step="0.1"
-                    value={consumoGasolina}
+                    value={safeConsumoGasolina}
                     onChange={(e) => setConsumoGasolina(Number(e.target.value))}
                     className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
                   />
@@ -147,7 +171,7 @@ export default function App() {
                         type="number"
                         step="0.01"
                         value={precioGasolina}
-                        onChange={(e) => setPrecioGasolina(Number(e.target.value))}
+                        onChange={(e) => setPrecioGasolina(e.target.value)}
                         className="w-14 bg-transparent text-right font-bold text-amber-400 focus:outline-none"
                       />
                       <span className="text-xs text-slate-400">€/l</span>
@@ -158,7 +182,7 @@ export default function App() {
                     min="1.00"
                     max="2.50"
                     step="0.01"
-                    value={precioGasolina}
+                    value={safePrecioGasolina}
                     onChange={(e) => setPrecioGasolina(Number(e.target.value))}
                     className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
                   />
@@ -171,7 +195,7 @@ export default function App() {
                 Coste Anual Estimado
               </span>
               <span className="text-2xl font-bold text-amber-400">
-                {isNaN(costeGasolina) ? '0.00' : costeGasolina.toFixed(2)} €
+                {costeGasolina.toFixed(2)} €
               </span>
             </div>
           </div>
@@ -179,9 +203,23 @@ export default function App() {
           {/* Columna Derecha: Eléctrico */}
           <div className="bg-slate-900/60 p-6 rounded-xl border border-cyan-500/30 flex flex-col justify-between space-y-6">
             <div>
-              <h2 className="text-xl font-bold text-cyan-400 mb-6 text-center">
-                Vehículo EV
-              </h2>
+              {/* Cabecera con título y botón de Opciones Avanzadas */}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-cyan-400">
+                  Vehículo EV
+                </h2>
+                <button
+                  onClick={() => setMostrarAvanzado(!mostrarAvanzado)}
+                  className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-colors border cursor-pointer flex items-center gap-1 ${
+                    mostrarAvanzado
+                      ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50'
+                      : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-slate-200'
+                  }`}
+                  title="Configurar recarga pública / fuera de casa"
+                >
+                  ⚙️ {mostrarAvanzado ? 'Avanzado ON' : 'Opciones avanzadas'}
+                </button>
+              </div>
 
               <div className="space-y-6">
                 {/* Consumo kWh/100km */}
@@ -196,7 +234,7 @@ export default function App() {
                         type="number"
                         step="0.5"
                         value={consumoElectrico}
-                        onChange={(e) => setConsumoElectrico(Number(e.target.value))}
+                        onChange={(e) => setConsumoElectrico(e.target.value)}
                         className="w-14 bg-transparent text-right font-bold text-cyan-400 focus:outline-none"
                       />
                       <span className="text-xs text-slate-400">kWh/100km</span>
@@ -207,24 +245,24 @@ export default function App() {
                     min="10"
                     max="30"
                     step="0.5"
-                    value={consumoElectrico}
+                    value={safeConsumoElectrico}
                     onChange={(e) => setConsumoElectrico(Number(e.target.value))}
                     className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
                   />
                 </div>
 
-                {/* Precio €/kWh */}
+                {/* Precio €/kWh (en casa) */}
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <label className="text-sm font-medium text-slate-300">
-                      Precio energía
+                      {mostrarAvanzado ? 'Precio energía (en casa)' : 'Precio energía'}
                     </label>
                     <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
                       <input
                         type="number"
                         step="0.01"
                         value={precioKwh}
-                        onChange={(e) => setPrecioKwh(Number(e.target.value))}
+                        onChange={(e) => setPrecioKwh(e.target.value)}
                         className="w-14 bg-transparent text-right font-bold text-cyan-400 focus:outline-none"
                       />
                       <span className="text-xs text-slate-400">€/kWh</span>
@@ -235,11 +273,77 @@ export default function App() {
                     min="0.05"
                     max="0.50"
                     step="0.01"
-                    value={precioKwh}
+                    value={safePrecioKwh}
                     onChange={(e) => setPrecioKwh(Number(e.target.value))}
                     className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
                   />
                 </div>
+
+                {/* BLOQUE OPCIONES AVANZADAS */}
+                {mostrarAvanzado && (
+                  <div className="pt-4 border-t border-cyan-500/20 space-y-6">
+                    {/* Precio €/kWh (fuera de casa) */}
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="text-sm font-medium text-slate-300">
+                          Precio fuera de casa
+                        </label>
+                        <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
+                          <input
+                            type="number"
+                            step="0.01"
+                            value={precioKwhFuera}
+                            onChange={(e) => setPrecioKwhFuera(e.target.value)}
+                            className="w-14 bg-transparent text-right font-bold text-cyan-400 focus:outline-none"
+                          />
+                          <span className="text-xs text-slate-400">€/kWh</span>
+                        </div>
+                      </div>
+                      <input
+                        type="range"
+                        min="0.10"
+                        max="0.90"
+                        step="0.01"
+                        value={safePrecioKwhFuera}
+                        onChange={(e) => setPrecioKwhFuera(Number(e.target.value))}
+                        className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                      />
+                    </div>
+
+                    {/* Porcentaje de carga fuera de casa */}
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="text-sm font-medium text-slate-300">
+                          Recargas fuera de casa
+                        </label>
+                        <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700">
+                          <input
+                            type="number"
+                            min="0"
+                            max="100"
+                            step="5"
+                            value={porcentajeFuera}
+                            onChange={(e) => setPorcentajeFuera(e.target.value)}
+                            className="w-12 bg-transparent text-right font-bold text-cyan-400 focus:outline-none"
+                          />
+                          <span className="text-xs text-slate-400">%</span>
+                        </div>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        step="5"
+                        value={safePorcentajeFuera}
+                        onChange={(e) => setPorcentajeFuera(Number(e.target.value))}
+                        className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                      />
+                      <p className="text-[11px] text-slate-400 mt-1">
+                        {safePorcentajeFuera}% fuera ({kmFuera} km) · {100 - safePorcentajeFuera}% en casa ({kmEnCasa} km)
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -248,7 +352,7 @@ export default function App() {
                 Coste Anual Estimado
               </span>
               <span className="text-2xl font-bold text-cyan-400">
-                {isNaN(costeElectrico) ? '0.00' : costeElectrico.toFixed(2)} €
+                {costeElectrico.toFixed(2)} €
               </span>
             </div>
           </div>
