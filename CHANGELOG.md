@@ -6,6 +6,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 
 ### Añadido
 - Mensaje dinámico sobre el ahorro o sobrecoste del EV
+- Documento de posibles mejoras futuras: mejoras.md
 
 ## [1.4.0] - 2026-08-08
 
