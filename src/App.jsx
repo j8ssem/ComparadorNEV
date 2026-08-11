@@ -47,9 +47,17 @@ export default function App() {
 
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
-        <h1 className="text-3xl font-extrabold text-center mb-8 text-emerald-400">
-          Comparador de ahorro entre vehículos de nueva energía (NEV)
-        </h1>
+        <header className="text-center mb-8">
+          {/* Título principal: Impactante pero compacto */}
+          <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-400 tracking-tight mb-2">
+            ComparadorNEV
+          </h1>
+          
+          {/* Subtítulo: Informativo, tono más suave y tamaño reducido */}
+          <p className="text-base md:text-lg text-slate-300 max-w-xl mx-auto font-normal">
+            Calcula tu ahorro anual estimado entre un vehículo de nueva energía (NEV) y uno de combustión
+          </p>
+        </header>
 
         {/* 1. Bloque superior: Kilómetros anuales */}
         <div className="max-w-lg mx-auto mb-8 bg-slate-700/40 p-5 rounded-xl border border-slate-600">
