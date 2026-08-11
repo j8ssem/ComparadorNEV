@@ -1,8 +1,11 @@
 # ComparadorNEV — Comparador de ahorro entre vehículos de nueva energía (NEV)
 
-![Version](https://img.shields.io/badge/version-1.6.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.7.0-blue.svg)
 
 Aplicación web interactiva para calcular y comparar el coste anual de uso entre un vehículo de combustión tradicional y un vehículo eléctrico.
+
+Para usarla, simplemente accede a la URL de Github Pages donde se aloja la web de [ComparadorNEV](https://j8ssem.github.io/ComparadorNEV/)
+
 
 ---
 
