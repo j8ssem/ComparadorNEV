@@ -5,8 +5,8 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ## [1.7.0] - 2026-08-11
 
 ### Added
-- NPM Package and config to build gh-page
-- Workflow to deploy gh-page
+- NPM Package and config to build gh-page manually
+- Workflow automated gh-pages deployment
 
 ## [1.6.0] - 2026-08-11
 
