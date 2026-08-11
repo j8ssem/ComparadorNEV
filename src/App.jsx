@@ -26,7 +26,9 @@ export default function App() {
   // Cálculos de costes
   const costeGasolina = (kmAnuales / 100) * consumoGasolina * precioGasolina;
   const costeElectrico = (kmAnuales / 100) * (consumoElectrico * CHARGING_LOSS_FACTOR) * precioKwh;
-  const ahorroAnual = costeGasolina - costeElectrico;
+  const diferencia = costeGasolina - costeElectrico;
+  const esAhorro = diferencia >= 0;
+  const importeAbsoluto = Math.abs(diferencia).toFixed(2);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
@@ -46,7 +48,7 @@ export default function App() {
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
         <h1 className="text-3xl font-extrabold text-center mb-8 text-emerald-400">
-          Comparador de ahorro: Combustión vs. Eléctrico
+          Comparador de ahorro anual: Combustión vs. Eléctrico
         </h1>
 
         {/* 1. Bloque superior: Kilómetros anuales */}
@@ -246,13 +248,18 @@ export default function App() {
         </div>
 
         {/* 3. Bloque inferior: Ahorro Anual */}
-        <div className="bg-emerald-950/40 border border-emerald-500/40 p-6 rounded-xl text-center">
-          <span className="text-sm font-medium text-emerald-300 uppercase tracking-wider block mb-1">
-            Ahorro estimado con el eléctrico
-          </span>
-          <span className="text-4xl font-black text-emerald-400">
-            {isNaN(ahorroAnual) ? '0.00' : ahorroAnual.toFixed(2)} € / año
-          </span>
+        <div className={`p-6 rounded-xl border text-center transition-all ${
+          esAhorro 
+            ? 'bg-emerald-950/20 border-emerald-500/30 text-emerald-300' 
+            : 'bg-rose-950/20 border-rose-500/30 text-rose-300'
+        }`}>
+          <h3 className="text-xs font-semibold uppercase tracking-wider opacity-80 mb-2">
+            {esAhorro ? 'Ahorro estimado del Vehículo Eléctrico' : 'Sobrecoste estimado del Vehículo Eléctrico'}
+          </h3>
+          
+          <p className="text-5xl font-extrabold tracking-tight">
+            {importeAbsoluto} €
+          </p>
         </div>
 
       </div>
