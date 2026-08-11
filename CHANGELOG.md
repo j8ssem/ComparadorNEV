@@ -2,7 +2,13 @@
 
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
 
-## [1.6.0] - 2026-08-08
+## [1.7.0] - 2026-08-11
+
+### Added
+- NPM Package and config to build gh-page manually
+- Workflow automated gh-pages deployment
+
+## [1.6.0] - 2026-08-11
 
 ### Added
 - Add footer
@@ -13,8 +19,7 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1
 ### Removed
 - Roadmap help info file `mejoras.md`
 
-
-## [1.5.0] - 2026-08-08
+## [1.5.0] - 2026-08-11
 
 ### Añadido
 - Mensaje dinámico sobre el ahorro o sobrecoste del EV
