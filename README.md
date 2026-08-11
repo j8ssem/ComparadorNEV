@@ -1,4 +1,4 @@
-# 🚗 Calculina — Comparadora de Ahorro Energético
+# Calculina — Comparador de Ahorro Energético
 
 ![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)
 
