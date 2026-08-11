@@ -47,9 +47,17 @@ export default function App() {
 
       <div className="max-w-4xl w-full bg-slate-800 p-6 md:p-8 rounded-2xl shadow-xl border border-slate-700">
         
-        <h1 className="text-3xl font-extrabold text-center mb-8 text-emerald-400">
-          Comparador de ahorro anual: Combustión vs. Eléctrico
-        </h1>
+        <header className="text-center mb-8">
+          {/* Título principal: Impactante pero compacto */}
+          <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-400 tracking-tight mb-2">
+            ComparadorNEV
+          </h1>
+          
+          {/* Subtítulo: Informativo, tono más suave y tamaño reducido */}
+          <p className="text-base md:text-lg text-slate-300 max-w-xl mx-auto font-normal">
+            Calcula tu ahorro anual estimado entre un vehículo de nueva energía (NEV) y uno de combustión
+          </p>
+        </header>
 
         {/* 1. Bloque superior: Kilómetros anuales */}
         <div className="max-w-lg mx-auto mb-8 bg-slate-700/40 p-5 rounded-xl border border-slate-600">
@@ -172,7 +180,7 @@ export default function App() {
           <div className="bg-slate-900/60 p-6 rounded-xl border border-cyan-500/30 flex flex-col justify-between space-y-6">
             <div>
               <h2 className="text-xl font-bold text-cyan-400 mb-6 text-center">
-                Vehículo Eléctrico
+                Vehículo EV
               </h2>
 
               <div className="space-y-6">
@@ -263,6 +271,24 @@ export default function App() {
         </div>
 
       </div>
+
+      <footer className="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500">
+        <p>
+          ComparadorNEV © 2026 — Desarrollado por{' '}
+          <a 
+            href="https://github.com/j8ssem" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-slate-200 underline transition-colors"
+          >
+            j8ssem
+          </a>
+        </p>
+        <p className="mt-1 opacity-75">
+          Licencia MIT · Proyecto Open Source
+        </p>
+      </footer>
+
     </div>
   );
 }
