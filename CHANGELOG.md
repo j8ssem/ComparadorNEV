@@ -1,6 +1,18 @@
-# Registro de Cambios (Changelog)
+# Changelog
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y usa [Semantic Versioning](https://semver.org/lang/es/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.10.0] - 2026-08-12
+
+### Changed
+* **Cross-browser Range Input Styling:** Refactored `<input type="range">` controls to use dynamic CSS linear gradients, enforcing a consistent inactive track color (`slate-700`) across Chromium, WebKit, and Gecko engines.
+* **Custom Slider Thumb Design:** Standardized the slider thumb UI across desktop and mobile browsers (Chrome, Edge, Safari, Firefox) with a unified `slate-200` color scheme, shadow, and interactive hover state.
+
+### Added
+* **SEO Optimization:** Enhanced page metadata, Open Graph tags, and semantic HTML layout to improve search engine visibility and indexing.
+
+### Fixed
+* **Chromium Dynamic Contrast Artifacts:** Resolved track background inconsistencies caused by browser-level automatic contrast algorithms when using `accent-color`.
 
 ## [1.9.1] - 2026-08-12
 
