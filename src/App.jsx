@@ -2,6 +2,12 @@ import { useState } from 'react';
 import { DEFAULT_VALUES, CHARGING_LOSS_FACTOR } from './constants';
 import { TooltipInfo } from './TooltipInfo';
 
+// Función para calcular el degradado dinámico perfecto en todos los navegadores
+const getSliderBackground = (value, min, max, activeColor) => {
+  const percentage = ((value - min) / (max - min)) * 100;
+  return `linear-gradient(to right, ${activeColor} ${percentage}%, #334155 ${percentage}%)`;
+};
+
 export default function App() {
   // Estado Modo Comparativa
   const [modoComparativa, setModoComparativa] = useState('ICE_VS_EV');
@@ -103,7 +109,7 @@ export default function App() {
   const kmEnCasa = Math.round(safeKmAnuales * ((100 - safePorcentajeFuera) / 100));
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
+    <main className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
       <style>{`
         input[type='number']::-webkit-inner-spin-button,
         input[type='number']::-webkit-outer-spin-button {
@@ -112,6 +118,48 @@ export default function App() {
         }
         input[type='number'] {
           -moz-appearance: textfield;
+        }
+
+        /* 1. Base común del slider */
+        input[type='range'] {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 0.5rem;
+          border-radius: 0.5rem;
+          outline: none;
+        }
+
+        /* 2. Bolita personalizada para Chrome, Edge y Safari */
+        input[type='range']::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 1.15rem;
+          height: 1.15rem;
+          border-radius: 50%;
+          background: #e2e8f0; /* Tono slate-200 en vez de #ffffff */
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+          cursor: pointer;
+          transition: transform 0.1s ease, background-color 0.1s ease;
+        }
+
+        input[type='range']::-webkit-slider-thumb:hover {
+          transform: scale(1.15);
+        }
+
+        /* 3. Bolita personalizada para Firefox */
+        input[type='range']::-moz-range-thumb {
+          width: 1.15rem;
+          height: 1.15rem;
+          border: none;
+          border-radius: 50%;
+          background: #e2e8f0; /* Tono slate-200 en vez de #ffffff */
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+          cursor: pointer;
+          transition: transform 0.1s ease, background-color 0.1s ease;
+        }
+
+        input[type='range']::-moz-range-thumb:hover {
+          transform: scale(1.15);
         }
       `}</style>
 
@@ -149,7 +197,10 @@ export default function App() {
             step="500"
             value={safeKmAnuales}
             onChange={(e) => setKmAnuales(Number(e.target.value))}
-            className="w-full accent-emerald-500 cursor-pointer h-2 bg-slate-600 rounded-lg"
+            className="w-full accent-emerald-500 cursor-pointer h-2 rounded-lg"
+            style={{
+              background: getSliderBackground(safeKmAnuales, 1000, 50000, '#10b981')
+            }}
           />
 
           <div className="mt-4 flex justify-center">
@@ -229,7 +280,10 @@ export default function App() {
                       step="0.1"
                       value={safeConsumoGasolina}
                       onChange={(e) => setConsumoGasolina(Number(e.target.value))}
-                      className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                      className="w-full accent-amber-500 cursor-pointer h-2 rounded-lg"
+                      style={{
+                        background: getSliderBackground(safeConsumoGasolina, 3, 15, '#f59e0b')
+                      }}
                     />
                   </div>
 
@@ -254,7 +308,10 @@ export default function App() {
                       step="0.01"
                       value={safePrecioGasolina}
                       onChange={(e) => setPrecioGasolina(Number(e.target.value))}
-                      className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                      className="w-full accent-amber-500 cursor-pointer h-2 rounded-lg"
+                      style={{
+                        background: getSliderBackground(safePrecioGasolina, 1, 2.5, '#f59e0b')
+                      }}
                     />
                   </div>
                 </div>
@@ -330,7 +387,6 @@ export default function App() {
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between items-center mb-2 gap-2">
-                      {/* Grupo de texto + tooltip alineados e independientes */}
                       <div className="flex items-center gap-1.5 min-w-0 mr-2">
                         <label className="text-sm font-medium text-slate-300 leading-tight">
                           Consumo medio
@@ -338,7 +394,6 @@ export default function App() {
                         <TooltipInfo />
                       </div>
 
-                      {/* Caja de valor numérico */}
                       <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700 shrink-0">
                         <input
                           type="number"
@@ -358,7 +413,10 @@ export default function App() {
                       step="0.5"
                       value={safeConsumoElectrico}
                       onChange={(e) => setConsumoElectrico(Number(e.target.value))}
-                      className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                      className="w-full accent-cyan-500 cursor-pointer h-2 rounded-lg"
+                      style={{
+                        background: getSliderBackground(safeConsumoElectrico, 10, 30, '#06b6d4')
+                      }}
                     />
                   </div>
 
@@ -385,7 +443,10 @@ export default function App() {
                       step="0.01"
                       value={safePrecioKwh}
                       onChange={(e) => setPrecioKwh(Number(e.target.value))}
-                      className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                      className="w-full accent-cyan-500 cursor-pointer h-2 rounded-lg"
+                      style={{
+                        background: getSliderBackground(safePrecioKwh, 0.05, 0.5, '#06b6d4')
+                      }}
                     />
                   </div>
 
@@ -412,7 +473,10 @@ export default function App() {
                           step="0.01"
                           value={safePrecioKwhFuera}
                           onChange={(e) => setPrecioKwhFuera(Number(e.target.value))}
-                          className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                          className="w-full accent-cyan-500 cursor-pointer h-2 rounded-lg"
+                          style={{
+                            background: getSliderBackground(safePrecioKwhFuera, 0.1, 0.9, '#06b6d4')
+                          }}
                         />
                       </div>
 
@@ -439,7 +503,10 @@ export default function App() {
                           step="5"
                           value={safePorcentajeFuera}
                           onChange={(e) => setPorcentajeFuera(Number(e.target.value))}
-                          className="w-full accent-cyan-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                          className="w-full accent-cyan-500 cursor-pointer h-2 rounded-lg"
+                          style={{
+                            background: getSliderBackground(safePorcentajeFuera, 0, 100, '#06b6d4')
+                          }}
                         />
                         <p className="text-[11px] text-slate-400 mt-1">
                           {safePorcentajeFuera}% fuera ({kmFuera} km) · {100 - safePorcentajeFuera}% en casa ({kmEnCasa} km)
@@ -488,7 +555,7 @@ export default function App() {
         </p>
         <p className="mt-1 opacity-75">Licencia MIT · Proyecto Open Source</p>
       </footer>
-    </div>
+    </main>
   );
 }
 
@@ -548,7 +615,10 @@ function PhevCard({
               step="5"
               value={safePorcentajeElectricoPhev}
               onChange={(e) => setPorcentajeElectricoPhev(Number(e.target.value))}
-              className="w-full accent-purple-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+              className="w-full accent-purple-500 cursor-pointer h-2 rounded-lg"
+              style={{
+                background: getSliderBackground(safePorcentajeElectricoPhev, 0, 100, '#a855f7')
+              }}
             />
             <p className="text-[11px] text-slate-400 mt-1">
               {safePorcentajeElectricoPhev}% eléctrico ({kmPhevElectrico} km) · {100 - safePorcentajeElectricoPhev}% híbrido ({kmPhevGasolina} km)
@@ -560,7 +630,6 @@ function PhevCard({
             {/* Consumo modo EV con Tooltip */}
             <div>
               <div className="flex justify-between items-center mb-2 gap-2">
-                {/* Agrupamos la etiqueta y el tooltip en su propio flex ajustado */}
                 <div className="flex items-center gap-1.5 min-w-0 mr-2">
                   <label className="text-sm font-medium text-slate-300 leading-tight">
                     Consumo modo EV
@@ -568,7 +637,6 @@ function PhevCard({
                   <TooltipInfo />
                 </div>
 
-                {/* Caja con el valor numérico */}
                 <div className="flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700 shrink-0">
                   <input
                     type="number"
@@ -588,7 +656,10 @@ function PhevCard({
                 step="0.5"
                 value={safeConsumoPhevElectrico}
                 onChange={(e) => setConsumoPhevElectrico(Number(e.target.value))}
-                className="w-full accent-purple-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                className="w-full accent-purple-500 cursor-pointer h-2 rounded-lg"
+                style={{
+                  background: getSliderBackground(safeConsumoPhevElectrico, 5, 25, '#a855f7')
+                }}
               />
             </div>
 
@@ -616,7 +687,10 @@ function PhevCard({
                 step="0.01"
                 value={safePrecioKwhPhev}
                 onChange={(e) => setPrecioKwhPhev(Number(e.target.value))}
-                className="w-full accent-purple-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                className="w-full accent-purple-500 cursor-pointer h-2 rounded-lg"
+                style={{
+                  background: getSliderBackground(safePrecioKwhPhev, 0.05, 0.5, '#a855f7')
+                }}
               />
             </div>
           </div>
@@ -652,7 +726,10 @@ function PhevCard({
                 step="0.1"
                 value={safeConsumoPhevGasolina}
                 onChange={(e) => setConsumoPhevGasolina(Number(e.target.value))}
-                className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                className="w-full accent-amber-500 cursor-pointer h-2 rounded-lg"
+                style={{
+                  background: getSliderBackground(safeConsumoPhevGasolina, 0.5, 12, '#f59e0b')
+                }}
               />
             </div>
 
@@ -680,7 +757,10 @@ function PhevCard({
                 step="0.01"
                 value={safePrecioGasolinaPhev}
                 onChange={(e) => setPrecioGasolinaPhev(Number(e.target.value))}
-                className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-700 rounded-lg"
+                className="w-full accent-amber-500 cursor-pointer h-2 rounded-lg"
+                style={{
+                  background: getSliderBackground(safePrecioGasolinaPhev, 1, 2.5, '#f59e0b')
+                }}
               />
             </div>
           </div>
