@@ -1,5 +1,5 @@
 import { SliderInput } from './common/SliderInput';
-import { TooltipInfo } from './TooltipInfo';
+import { TooltipInfo } from '../TooltipInfo';
 
 /**
  * Tarjeta del vehículo eléctrico (EV)
